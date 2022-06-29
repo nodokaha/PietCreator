@@ -22,6 +22,7 @@
 #include "KColorMimeData.h"
 #include "ColorUtils.h"
 
+#include <QtWidgets>
 #include <QtGui>
 
 #include <math.h>
@@ -190,6 +191,7 @@ void KColorCells::resizeEvent( QResizeEvent* )
         horizontalHeader()->resizeSection( index, sizeHintForColumn( index ) );
     for ( int index = 0 ; index < rowCount() ; index++ )
         verticalHeader()->resizeSection( index, sizeHintForRow( index ) );
+  //  QHeaderView::resizeSection()
 }
 
 int KColorCells::sizeHintForColumn( int /*column*/ ) const

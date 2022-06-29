@@ -97,7 +97,7 @@ CommandWidget::CommandWidget( ViewMonitor* monitor, QWidget* parent ): QWidget( 
     mCommandsView = new QTableView( this );
     mCommandsView->horizontalHeader()->hide();
     mCommandsView->verticalHeader()->hide();
-    mCommandsView->horizontalHeader()->setResizeMode( QHeaderView::ResizeToContents );
+    mCommandsView->horizontalHeader()->setSectionResizeMode( QHeaderView::ResizeToContents );
     mCommandsView->setModel( mCommandsModel );
     mCommandDelegate = new CommandDelegate( mMonitor, this );
     mCommandsView->setItemDelegate( mCommandDelegate );

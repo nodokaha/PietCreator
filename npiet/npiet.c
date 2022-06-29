@@ -1157,7 +1157,7 @@ read_png (char *fname)
 /*
  * gif read support:
  */
-
+#undef HAVE_GIF_LIB_H
 #ifndef HAVE_GIF_LIB_H
 
 /*
@@ -1183,21 +1183,21 @@ read_gif (char *fname)
     return -1;
   }
 
-  if (! (gif = DGifOpenFileName (fname))) {
+  if (! (gif = DGifOpenFileName (fname, GIF_ERROR))) {
     /* return error silently: */
     return -1;
   }
   
   if (DGifGetRecordType (gif, &rtype) == GIF_ERROR) {
     PrintGifError ();
-    DGifCloseFile (gif);
+    DGifCloseFile (gif, GIF_ERROR);
     return -1;
   }
 
   if (rtype != IMAGE_DESC_RECORD_TYPE 
       || DGifGetImageDesc (gif) == GIF_ERROR) {
     fprintf (stderr, "error: unknown gif format - exiting\n");
-    DGifCloseFile (gif);
+    DGifCloseFile (gif, GIF_ERROR);
     exit (-1);
   }
 
@@ -1263,7 +1263,7 @@ read_gif (char *fname)
     }
   }
 
-  DGifCloseFile (gif);
+  DGifCloseFile (gif, GIF_ERROR);
 
   return 0;
 }

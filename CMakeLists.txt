@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.6)
 set( CMAKE_BUILD_TYPE Debug)
 set( DEBUG_BUILD_TYPE ON )
 
-find_package(Qt4 REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
 add_subdirectory( npiet )
 
@@ -32,15 +32,18 @@ set( pietcreator_SRCS
     UndoCommands.cpp
     UndoHandler.cpp )
 
+set( CMAKE_AUTOMOC ON )
+
 set( pietcreator_RCS
     fallback.qrc
     pietcreator.qrc )
 
-QT4_ADD_RESOURCES( pietcreator_SRCS ${pietcreator_RCS} )
+qt5_wrap_cpp( pietcreator_SRCS )
 
-qt4_automoc(${pietcreator_SRCS})
+QT5_ADD_RESOURCES( pietcreator_SRCS ${pietcreator_RCS} )
 
-qt4_wrap_ui( pietcreator_SRCS MainWindow.ui DebugWidget.ui )
+qt5_wrap_ui( pietcreator_SRCS MainWindow.ui DebugWidget.ui )
+
 
 IF(WIN32) 
 add_executable(pietcreator ${pietcreator_SRCS} ${CMAKE_CURRENT_SOURCE_DIR}/pietcreator.rc)
@@ -49,7 +52,8 @@ add_executable(pietcreator ${pietcreator_SRCS})
 endif(WIN32)
 
 target_link_libraries( pietcreator
-                       ${QT_QTCORE_LIBRARY}
-                       ${QT_QTGUI_LIBRARY}
+		       Qt5::Gui
+		       Qt5::Core
+		       Qt5::Widgets
                        npiet
                          )

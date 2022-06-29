@@ -24,6 +24,7 @@
 #include "ColorUtils.h"
 
 #include <QtGui>
+#include <QtWidgets>
 
 CommandDelegate::CommandDelegate( ViewMonitor* monitor, QObject* parent ): QStyledItemDelegate( parent ), mMonitor( monitor )
 {

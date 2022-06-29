@@ -290,7 +290,7 @@ void RunController::putChar( const QChar & c )
 {
     qDebug() << "putChar";
     QMutexLocker locker( &mMutex );
-    mChar = c.toAscii();
+    mChar = c.unicode();
     mWaitCond.wakeOne();
 }
 

@@ -1,6 +1,7 @@
 #include "ResizeDialog.h"
 
 #include <QtGui>
+#include <QtWidgets>
 
 ResizeDialog::ResizeDialog( const QSize &size, QWidget *parent ) :
     QDialog( parent )

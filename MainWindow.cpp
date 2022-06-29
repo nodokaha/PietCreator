@@ -65,8 +65,8 @@ MainWindow::MainWindow( QWidget *parent ) :
     ui->mView->verticalHeader()->hide();
     ui->mView->horizontalHeader()->setMinimumSectionSize( 1 );
     ui->mView->verticalHeader()->setMinimumSectionSize( 1 );
-    ui->mView->verticalHeader()->setResizeMode( QHeaderView::Fixed );
-    ui->mView->horizontalHeader()->setResizeMode( QHeaderView::Fixed );
+    ui->mView->verticalHeader()->setSectionResizeMode( QHeaderView::Fixed );
+    ui->mView->horizontalHeader()->setSectionResizeMode( QHeaderView::Fixed );
     ui->mView->horizontalHeader()->setDefaultSectionSize( 12 );
     ui->mView->verticalHeader()->setDefaultSectionSize( 12 );
     ui->mView->viewport()->setMouseTracking( true ); // to enable Qt::StatusTipRole
@@ -336,7 +336,7 @@ void MainWindow::slotActionOpen()
     if ( !promptSave() )
         return;
     QString file_name = QFileDialog::getOpenFileName( this, tr( "Open Image File" ),
-                        QDesktopServices::storageLocation( QDesktopServices::HomeLocation ),
+                        QStandardPaths::writableLocation( QStandardPaths::HomeLocation ),
                         tr( "Images (*.png *.bmp *.ppm *.gif)" ) );
     QImage image( file_name );
     if ( !image.isNull() ) {
@@ -359,7 +359,7 @@ void MainWindow::slotActionSaveAs()
 
     QString selected_filter;
     QString file_name = QFileDialog::getSaveFileName( this, tr( "Choose a file to save to" ),
-                        QDesktopServices::storageLocation( QDesktopServices::HomeLocation ),
+                        QStandardPaths::writableLocation( QStandardPaths::HomeLocation ),
                         mSaveMessage,
                         &selected_filter );
     if ( file_name.isEmpty() )
@@ -441,8 +441,8 @@ void MainWindow::slotActionToggleHeaders()
         ui->mView->verticalHeader()->hide();
         ui->mView->horizontalHeader()->setMinimumSectionSize( 1 );
         ui->mView->verticalHeader()->setMinimumSectionSize( 1 );
-        ui->mView->verticalHeader()->setResizeMode( QHeaderView::Fixed );
-        ui->mView->horizontalHeader()->setResizeMode( QHeaderView::Fixed );
+        ui->mView->verticalHeader()->setSectionResizeMode( QHeaderView::Fixed );
+        ui->mView->horizontalHeader()->setSectionResizeMode( QHeaderView::Fixed );
         ui->mView->horizontalHeader()->setDefaultSectionSize( mMonitor->pixelSize() );
         ui->mView->verticalHeader()->setDefaultSectionSize( mMonitor->pixelSize() );
         ui->mZoomSlider->setMinimum( 4 );
@@ -450,8 +450,8 @@ void MainWindow::slotActionToggleHeaders()
     } else {  //show
         ui->mView->horizontalHeader()->show();
         ui->mView->verticalHeader()->show();
-        ui->mView->verticalHeader()->setResizeMode( QHeaderView::Fixed );
-        ui->mView->horizontalHeader()->setResizeMode( QHeaderView::Fixed );
+        ui->mView->verticalHeader()->setSectionResizeMode( QHeaderView::Fixed );
+        ui->mView->horizontalHeader()->setSectionResizeMode( QHeaderView::Fixed );
         int rows = mModel->rowCount();
         if ( rows == 0 )
             return;
@@ -491,7 +491,7 @@ void MainWindow::slotActionResize()
 void MainWindow::slotActionInsert()
 {
     QString file_name = QFileDialog::getOpenFileName( this, tr( "Open Image File" ),
-                        QDesktopServices::storageLocation( QDesktopServices::HomeLocation ),
+                        QStandardPaths::writableLocation( QStandardPaths::HomeLocation ),
                         tr( "Images (*.png *.bmp *.ppm *.gif)" ) );
     mInsertImage = QImage(file_name);
     if ( !mInsertImage.isNull() ) {

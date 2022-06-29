@@ -20,6 +20,7 @@
 
 #include "KColorMimeData.h"
 
+#include <QWidget>
 #include <QColor>
 #include <QDrag>
 #include <QMimeData>
